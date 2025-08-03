@@ -1,68 +1,147 @@
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=shem-org_CryptoTool&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=shem-org_CryptoTool)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=shem-org_CryptoTool&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=shem-org_CryptoTool)
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=shem-org_CryptoTool&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=shem-org_CryptoTool)
-[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=shem-org_CryptoTool&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=shem-org_CryptoTool)
-# CryptoTool
+# 🔐 CryptoTool - Biblioteca Educacional de Criptografia
 
-CryptoTool is an educational cryptography tool built in Golang. The project aims to implement both classic and modern encryption algorithms, such as AES, RSA, and others, to facilitate learning and understanding how these techniques work. Additionally, it is designed to be used as a library in future Go projects, providing functionalities for encrypting and decrypting data.
+## 🎯 Objetivo de Aprendizado
+Ferramenta educacional desenvolvida em Go para estudar **algoritmos criptográficos** clássicos e modernos. Implementa **AES**, **RSA**, **ECC**, **SHA-256** e outros algoritmos, servindo como biblioteca reutilizável e plataforma de aprendizado em segurança da informação.
 
-## Objectives
+## 🛠️ Tecnologias Utilizadas
+- **Linguagem:** Go
+- **Criptografia:** Algoritmos simétricos e assimétricos
+- **Hashing:** SHA-256, HMAC, scrypt
+- **Curvas elípticas:** ECC, ECDSA
+- **Qualidade:** SonarCloud integration
+- **Testes:** Unit testing para validação
 
-- Practice Go and study cryptography by implementing a variety of algorithms.
-- Use the implemented functions as a library (`cryptoLib`) in other Go projects.
-- Support both classical and modern cryptographic techniques.
+## 🚀 Demonstração
+```go
+// Exemplo de uso da biblioteca
+import "github.com/growthfolio/CryptoTool/pkg/cryptoLib"
 
-## Features
+// Criptografia AES
+encrypted, err := cryptoLib.AESEncrypt(plaintext, key)
+decrypted, err := cryptoLib.AESDecrypt(encrypted, key)
 
-- Additional algorithms coming soon
+// Assinatura digital ECDSA
+signature, err := cryptoLib.ECDSASign(message, privateKey)
+valid := cryptoLib.ECDSAVerify(message, signature, publicKey)
+```
 
-## Checklist of Cryptographic Implementations
+## 📊 Status de Implementação
 
-This checklist tracks the progress of the cryptographic techniques implemented in CryptoTool. You can follow along as we continue to expand the project.
+### ✅ Criptografia Simétrica
+- [x] **AES (Advanced Encryption Standard)** - Padrão moderno
+- [x] **ChaCha20** - Stream cipher seguro
+- [x] **Blowfish** - Algoritmo clássico (obsoleto)
+- [x] **DES/3DES** - Algoritmos históricos
 
-### Symmetric Encryption
+### ✅ Criptografia Assimétrica
+- [x] **RSA** - Rivest-Shamir-Adleman
+- [x] **ECC** - Elliptic Curve Cryptography
 
-- [x] **AES (Advanced Encryption Standard)**: Done
-- [x] **Blowfish**: Done **(obsolete encryption)**
-- [x] **ChaCha20**: Done
-- [x] **DES (Data Encryption Standard)**: Done
-- [x] **3DES (Triple DES)**: Done
+### ✅ Funções Hash
+- [x] **SHA-256** - Secure Hash Algorithm
+- [x] **HMAC** - Hash-based Message Authentication
 
-### Asymmetric Encryption
+### ✅ Assinaturas Digitais
+- [x] **ECDSA** - Elliptic Curve Digital Signature
 
-- [X] **RSA (Rivest-Shamir-Adleman)**: Done
-- [X] **ECC (Elliptic Curve Cryptography)**: Done
-- [ ] **ElGamal**: Pending
+### ✅ Derivação de Chaves
+- [x] **scrypt** - Password-based key derivation
 
-### Hashing Algorithms
+### 🔄 Em Desenvolvimento
+- [ ] **ElGamal** - Criptografia assimétrica
+- [ ] **SHA-3** - Nova geração de hash
+- [ ] **PBKDF2** - Key derivation function
+- [ ] **RC4** - Stream cipher (educacional)
 
-- [X] **SHA-256 (Secure Hash Algorithm 256)**: Done
-- [ ] **SHA-3**: Pending
-- [ ] **MD5**: Pending
-- [ ] **RIPEMD-160**: Pending
+## 💡 Principais Aprendizados
 
-### Digital Signatures
+### 🔒 Fundamentos Criptográficos
+- **Criptografia simétrica vs assimétrica:** Diferenças e aplicações
+- **Funções hash:** Integridade e autenticação
+- **Assinaturas digitais:** Não-repúdio e autenticidade
+- **Key derivation:** Geração segura de chaves
 
-- [ ] **DSA (Digital Signature Algorithm)**: Pending
-- [X] **ECDSA (Elliptic Curve Digital Signature Algorithm)**: Done
-- [ ] **RSA Digital Signatures**: Pending
+### 🏗️ Implementação Segura
+- **Constant-time operations:** Prevenção de timing attacks
+- **Secure random generation:** Entropia adequada
+- **Memory management:** Limpeza de dados sensíveis
+- **Error handling:** Tratamento seguro de falhas
 
-### Stream Ciphers
+### 📚 Algoritmos Estudados
+- **AES:** Substituição-permutação, modos de operação
+- **RSA:** Matemática modular, padding schemes
+- **ECC:** Curvas elípticas, pontos e operações
+- **SHA-256:** Merkle-Damgård construction
 
-- [ ] **RC4 (Rivest Cipher 4)**: Pending
-- [ ] **Salsa20**: Pending
+## 🧠 Conceitos Técnicos Estudados
 
-### Message Authentication Codes (MAC)
+### 1. **Implementação AES**
+```go
+// Estrutura do algoritmo AES
+type AES struct {
+    key        []byte
+    rounds     int
+    roundKeys  [][]byte
+}
 
-- [x] **HMAC (Hash-based Message Authentication Code)**: Done
-- [ ] **CMAC (Cipher-based Message Authentication Code)**: Pending
+func (a *AES) Encrypt(plaintext []byte) ([]byte, error) {
+    // SubBytes, ShiftRows, MixColumns, AddRoundKey
+    return a.processBlock(plaintext, true)
+}
+```
 
-### Key Derivation Functions
+### 2. **Curvas Elípticas (ECC)**
+```go
+// Operações em curvas elípticas
+type Point struct {
+    X, Y *big.Int
+}
 
-- [ ] **PBKDF2 (Password-Based Key Derivation Function 2)**: Pending
-- [ ] **bcrypt**: Pending
-- [x] **scrypt**: Done
+func (p *Point) Add(q *Point, curve *Curve) *Point {
+    // Adição de pontos na curva elíptica
+    return pointAdd(p, q, curve)
+}
+```
 
-## Usage
+### 3. **Geração Segura de Chaves**
+```go
+// Derivação de chaves com scrypt
+func DeriveKey(password, salt []byte, keyLen int) ([]byte, error) {
+    return scrypt.Key(password, salt, 32768, 8, 1, keyLen)
+}
+```
 
-To use CryptoTool as a library in your Go projects, import the necessary packages and call the encryption or decryption functions.
+## 🚧 Desafios Enfrentados
+1. **Implementação segura:** Evitar vulnerabilidades criptográficas
+2. **Performance:** Otimização de algoritmos complexos
+3. **Compatibilidade:** Interoperabilidade com padrões
+4. **Testing:** Validação contra test vectors conhecidos
+5. **Documentation:** Explicação clara de conceitos complexos
+
+## 📚 Recursos Utilizados
+- [Applied Cryptography - Bruce Schneier](https://www.schneier.com/books/applied-cryptography/)
+- [Cryptography Engineering](https://www.schneier.com/books/cryptography-engineering/)
+- [NIST Cryptographic Standards](https://csrc.nist.gov/projects/cryptographic-standards-and-guidelines)
+- [RFC Cryptographic Protocols](https://tools.ietf.org/rfc/)
+
+## 📈 Próximos Passos
+- [ ] Implementar algoritmos pós-quânticos
+- [ ] Adicionar benchmarks de performance
+- [ ] Criar exemplos práticos de uso
+- [ ] Implementar protocolos (TLS, SSH)
+- [ ] Adicionar análise de side-channel
+- [ ] Criar interface web educacional
+
+## 🔗 Projetos Relacionados
+- [JS Wallet Generator](../js-wallet-generator/) - Aplicação de criptografia Bitcoin
+- [Solidity CoinLink Token](../solidity-coinlink-token/) - Criptografia em blockchain
+- [Go Antifraud MS](../go-antifraud-ms/) - Aplicação de segurança
+
+---
+
+**Desenvolvido por:** Felipe Macedo  
+**Contato:** contato.dev.macedo@gmail.com  
+**GitHub:** [FelipeMacedo](https://github.com/felipemacedo1)  
+**LinkedIn:** [felipemacedo1](https://linkedin.com/in/felipemacedo1)
+
+> 💡 **Reflexão:** Este projeto proporcionou compreensão profunda dos fundamentos da criptografia moderna. A implementação prática de algoritmos complexos consolidou conhecimentos teóricos e demonstrou a importância da segurança em sistemas digitais.
